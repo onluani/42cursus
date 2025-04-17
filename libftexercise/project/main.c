@@ -6,12 +6,22 @@
 /*   By: antsitsk <antsitsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:05:38 by antsitsk          #+#    #+#             */
-/*   Updated: 2025/04/15 16:54:09 by antsitsk         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:21:31 by antsitsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+
+// Simple function to convert a character to uppercase
+char ft_toupper_wrapper(unsigned int index, char c)
+{
+	(void)index;
+    if (c >= 'a' && c <= 'z')
+        return (c - 32); // Convert lowercase to uppercase
+    return c; // Return unchanged character if it's not a lowercase letter
+}
+
 
 int	main(void)
 {
@@ -132,9 +142,26 @@ int	main(void)
 	printf("%s\n", ft_strtrim("--hello--", "-"));
 
 	//test split
-	char	**split_result = ft_split("  Hello  World C 42 ", ' ');
-	for (int i = 0; split_result[i]; i++)
-		{
-			printf("%s\n", split_result[i]); free(split_result[i]);
-		}
+	char **res = ft_split("hi there", ' ');
+	printf("%s\n%s\n", res[0], res[1]);
+
+	//test itoa
+	printf("%s\n", ft_itoa(42));
+	printf("%s\n", ft_itoa(-42));
+	printf("%s\n", ft_itoa(0));
+	
+	//test strmapi
+	// Test ft_strmapi with the string "hello" and the ft_toupper_wrapper function
+    char *result1 = ft_strmapi("hello", ft_toupper_wrapper);
+    
+    if (result1)
+    {
+        // Should print "HELLO"
+        printf("Result: %s\n", result1);
+        free(result1); // Don't forget to free the memory allocated by ft_strmapi
+    }
+    else
+    {
+        printf("Memory allocation failed.\n");
+    }
 }
