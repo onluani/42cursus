@@ -1,93 +1,63 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: antsitsk <antsitsk@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 15:50:40 by antsitsk          #+#    #+#             */
-/*   Updated: 2025/04/15 16:23:49 by antsitsk         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 
-static size_t	count_words(char const *s, char c)
+size_t	get_count(char const *s, char c)
 {
 	size_t	count;
 
 	count = 0;
-	while (*s && *s == c)
-		s++;
-	while (*s)
+	while (*s != '\0')
 	{
-		count++;
-		while (*s && *s != c)
+		if (*s == c)
 			s++;
-		while (*s && *s == c)
-			s++;
+		else
+		{
+			count++;
+			while (*s != '\0' && *s != c)
+				s++;
+		}
 	}
 	return (count);
 }
 
-static char	*get_word(const char *str, int start, int stop)
+char	**free_machine(char **s, size_t idx)
 {
-	char	*word;
-	int		i;
-
-	word = malloc(sizeof(char) * (stop - start + 1));
-	if (!word)
-		return (NULL);
-	i = -1;
-	while (++i < (stop - start))
-		word[i] = str[start + i];
-	word[i] = 0;
-	return (word);
-}
-
-static char	**free_all(char **split)
-{
-	int	i;
-
-	i = -1;
-	while (split[++i])
-		free(split[i]);
-	free(split);
+	while (idx > 0)
+	{
+		free(s[--idx]);
+	}
+	free(s);
 	return (NULL);
 }
 
-static void	skip_first_delimiter(const char *str, char c, int *i, int *start)
+char	**ft_split(char const *s, char c)
 {
-	*i = 0;
-	while (str[*i] && str[*i] == c)
-		(*i)++;
-	*start = *i;
-	*i -= 1;
-}
+	size_t	i;
+	size_t	len;
+	size_t	word_count;
+	char	**words;
 
-char	**ft_split(const char *str, char c)
-{
-	char	**split;
-	int		i;
-	int		word;
-	int		start;
+	i = 0;
 
-	split = malloc(sizeof(char *) * (count_words(str, c) + 1));
-	if (!split)
+	if (!s)
 		return (NULL);
-	word = 0;
-	skip_first_delimiter(str, c, &i, &start);
-	while (str[++i])
+	word_count = get_count(s, c);
+	words = malloc(sizeof(char *) * (word_count + 1));
+	if (!words)
+		return (NULL);
+	while (*s)
 	{
-		if (str[i + 1] == c || !str[i + 1])
+		if (*s == c)
+			s++;
+		else
 		{
-			split[word] = get_word(str, start, i +1);
-			if (!split[word++])
-				return (free_all(split));
-			while (str[i + 1] && str[i + 1] == c)
-				start = ++i + 1;
+			len = 0;
+			while (s[len] && s[len] != c)
+				len++;
+			if (!(words[i++] = ft_substr(s, 0, len)))
+				return (free_machine(words, i));
+			s += len;
 		}
 	}
-	split[word] = NULL;
-	return (split);
+	words[i] = NULL;
+	return (words);
 }
