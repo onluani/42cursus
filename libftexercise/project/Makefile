@@ -6,7 +6,7 @@
 #    By: antsitsk <antsitsk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 18:01:12 by antsitsk          #+#    #+#              #
-#    Updated: 2025/04/17 14:36:51 by antsitsk         ###   ########.fr        #
+#    Updated: 2025/04/17 15:50:11 by antsitsk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c \
 		ft_strrchr.c ft_tolower.c ft_toupper.c \
 		ft_memset.c ft_memcpy.c ft_substr.c \
 		ft_strjoin.c ft_strtrim.c ft_split.c \
-		ft_itoa.c ft_strmapi.c
+		ft_itoa.c ft_strmapi.c ft_striteri.c
 
 OBJ = $(SRC:.c=.o)
 
