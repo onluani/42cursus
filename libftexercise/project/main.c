@@ -6,20 +6,28 @@
 /*   By: antsitsk <antsitsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:05:38 by antsitsk          #+#    #+#             */
-/*   Updated: 2025/04/17 15:21:31 by antsitsk         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:59:27 by antsitsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-// Simple function to convert a character to uppercase
+//for strmapi
 char ft_toupper_wrapper(unsigned int index, char c)
 {
 	(void)index;
     if (c >= 'a' && c <= 'z')
         return (c - 32); // Convert lowercase to uppercase
     return c; // Return unchanged character if it's not a lowercase letter
+}
+
+//for striteri
+void	iter_func(unsigned int i, char *c)
+{
+	(void)i;
+	if (*c >= 'a' && *c <= 'z')
+		*c -= 32;
 }
 
 
@@ -164,4 +172,10 @@ int	main(void)
     {
         printf("Memory allocation failed.\n");
     }
+
+	//test striteri
+	char str[] = "hello42";
+	ft_striteri(str, iter_func);
+	printf("After ft_striteri: %s\n", str);
+	return (0);
 }
