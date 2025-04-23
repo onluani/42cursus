@@ -6,7 +6,7 @@
 /*   By: antsitsk <antsitsk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:05:38 by antsitsk          #+#    #+#             */
-/*   Updated: 2025/04/17 15:59:27 by antsitsk         ###   ########.fr       */
+/*   Updated: 2025/04/23 11:48:28 by antsitsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int	main(void)
 	//test bzero
 	char str2[] = "Hello, World!";
 	ft_bzero(str2, 5);
-	printf("ft_bzero: ");
+	printf("ft_bzero(ascii values): ");
 	for (int i = 0; i < 5; i++)
-		printf("%c", str2[i]);
+		printf("%d ", (unsigned char)str2[i]);
 	printf("\n");//should print "     World!"
 
 	//test memcpy
@@ -177,5 +177,34 @@ int	main(void)
 	char str[] = "hello42";
 	ft_striteri(str, iter_func);
 	printf("After ft_striteri: %s\n", str);
+
+	//test ft_putchar_fd
+	ft_putchar_fd('A', 1);
+    ft_putchar_fd('\n', 1);
+
+	//test ft_putstr_fd
+	ft_putstr_fd("Hello, 42!\n", 1);
+
+	//test ft_putendl_fd
+	ft_putendl_fd("This is a line with a newline at the end.", 1);
+    ft_putendl_fd("Another line, same deal!", 1);
+    ft_putendl_fd(NULL, 1); // Should do nothing (graceful null check)
+
+	//test ft_putnbr_fd
+	ft_putnbr_fd(42, 1);         // prints: 42
+    ft_putchar_fd('\n', 1);
+
+    ft_putnbr_fd(-12345, 1);     // prints: -12345
+    ft_putchar_fd('\n', 1);
+
+    ft_putnbr_fd(0, 1);          // prints: 0
+    ft_putchar_fd('\n', 1);
+
+    ft_putnbr_fd(2147483647, 1); // prints: 2147483647 (INT_MAX)
+    ft_putchar_fd('\n', 1);
+
+    ft_putnbr_fd(-2147483648, 1); // prints: -2147483648 (INT_MIN)
+    ft_putchar_fd('\n', 1);
+
 	return (0);
 }
