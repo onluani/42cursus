@@ -7,25 +7,27 @@ int	ft_putchar(char c, int *length)
 	return (*length);
 }
 
-void	ft_putnbr(int nb, int *length)
+void ft_putnbr(int nb, int *length)
 {
-	if (nb < 0)
-	{
-		nb = -nb;
-		ft_putchar('-', length);
-	}
-	if (nb == -2147483648)
-	{
-		ft_putchar('2', length);
-		nb = 147483648;
-	}
-	if (nb < 10)
-		ft_putchar(nb + '0', length);
-	else
-	{
-		ft_putnbr(nb / 10, length);
-		ft_putnbr(nb % 10, length);
-	}
+    if (nb == -2147483648)
+    {
+        ft_putchar('-', length);  
+        ft_putchar('2', length);   
+        nb = 147483648;  
+    }
+    else if (nb < 0)
+    {
+        ft_putchar('-', length); 
+        nb = -nb; 
+    }
+
+    if (nb < 10)
+        ft_putchar(nb + '0', length);
+    else
+    {
+        ft_putnbr(nb / 10, length);
+        ft_putnbr(nb % 10, length);
+    }
 }
 
 void	ft_putuns(unsigned int nb, int *length)
