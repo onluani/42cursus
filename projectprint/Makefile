@@ -1,5 +1,6 @@
 NAME = libftprintf.a
-SOURCES =
+SOURCES = ft_print.c parsing.c tools.c \
+			type_processing.c type_processing_hex.c
 OBJECTS = $(SOURCES:.c=.o)
 
 AR = ar
@@ -12,7 +13,7 @@ $(NAME): $(OBJECTS)
 	$(AR) -r $@ $^
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) $<
+	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
 	rm -f $(OBJECTS)
