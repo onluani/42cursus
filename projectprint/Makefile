@@ -1,5 +1,5 @@
 NAME = libftprintf.a
-SOURCES = ft_print.c parsing.c tools.c \
+SOURCES = ft_printf.c parsing.c tools.c \
 			type_processing.c type_processing_hex.c
 OBJECTS = $(SOURCES:.c=.o)
 
