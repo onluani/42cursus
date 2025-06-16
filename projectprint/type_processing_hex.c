@@ -32,7 +32,7 @@ void	p_type(va_list arguments, int *length, char *str)
 	}
 	else
 	{
-		adr = (unsigned long)ptr;
+		adr = (unsigned long long)ptr;
 		ft_putchar('0', length);
 		ft_putchar('x', length);
 		ft_puthex(adr, length, str);
